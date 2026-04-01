@@ -1,22 +1,85 @@
-# Pixly - Visor de Imágenes Seguro
+# Pixly.js 🖼️
 
-Esta es la versión distribuible y protegida de la librería **Pixly.js**.
+A lightweight, feature-rich, and secure image viewer for the web.
 
-## Archivos en esta carpeta:
-- `pixly.min.js`: Versión minificada y ofuscada lista para producción.
+## Quick Start (CDN)
 
-## Uso vía CDN (jsDelivr)
-
-Esta librería ya incluye sus propios estilos, por lo que solo necesitas incluir un único archivo JS en tu HTML:
+Simply include the following script in your HTML. Pixly automatically injects its own styles, so you only need one file:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/USUARIO/REPOSITORIO@latest/dist/pixly.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/duayalam/pixly@1.0.0/dist/pixly.min.js"></script>
 ```
 
-> **Nota:** No necesitas importar el archivo `.css` por separado; Pixly lo inyectará automáticamente al ejecutarse.
+---
+
+## How to Use
+
+### 1. Auto-detected HTML Gallery
+
+Wrap your images in a container and initialize Pixly using a selector. It will automatically detect images and set up the click events.
+
+**HTML:**
+
+```html
+<div class="my-gallery">
+  <img
+    src="image1.jpg"
+    data-title="Cool Image"
+    data-description="This is an awesome description."
+  />
+  <img src="image2.jpg" alt="Minimal fallback title" />
+</div>
+```
+
+**JavaScript:**
+
+```javascript
+new Pixly(".my-gallery", {
+  loop: true,
+  showTitle: true,
+  showDescription: true,
+});
+```
+
+### 2. Manual Array Gallery
+
+You can also open a gallery from a button click using a custom data array.
+
+**JavaScript:**
+
+```javascript
+const myImages = [
+  { src: "img1.jpg", title: "Image 1", description: "Desc 1" },
+  { src: "img2.jpg", title: "Image 2", description: "Desc 2" },
+];
+
+const viewer = new Pixly(myImages);
+
+// Open manually at index 0
+document.getElementById("openBtn").onclick = () => viewer.open(0);
+```
 
 ---
-> **Tip:** Puedes reemplazar `@latest` por el nombre de un tag o una versión específica (ej: `@v1.0.0`) para mayor estabilidad.
+
+## Configuration Options
+
+| Option            | Type    | Default | Description                                              |
+| :---------------- | :------ | :------ | :------------------------------------------------------- |
+| `loop`            | boolean | `true`  | Allows continuous navigation (last image back to first). |
+| `showTitle`       | boolean | `true`  | Displays the image title in the viewer header.           |
+| `showDescription` | boolean | `true`  | Displays the image description below the title.          |
+| `showTools`       | boolean | `true`  | Shows the floating toolbar (Zoom, Rotate, Flip, etc.).   |
 
 ---
-**Nota:** Esta versión incluye protección contra formateo (Self-Defending). Si intentas embellecer o formatear este código, dejará de funcionar automáticamente para proteger la autoría del código original.
+
+## Features
+
+- ✅ **Smooth Zoom**: Use buttons or mouse wheel anywhere.
+- ✅ **Ultra-Fluid Drag**: GPU-accelerated dragging to explore zoomed images.
+- ✅ **Transformations**: Support for 90° rotation and H/V flipping.
+- ✅ **Smart UI**: Modern floating toolbar with backdrop-filter.
+- ✅ **Secure**: Built-in "Self-Defending" obfuscation against code tampering/beautifying.
+
+---
+
+**Note:** This distributed version is obfuscated for protection. Attempting to format or modify the file will cause it to stop working.
